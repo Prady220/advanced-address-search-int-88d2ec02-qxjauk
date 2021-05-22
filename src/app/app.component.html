@@ -45,7 +45,7 @@
 </h4>
 
 <div *ngIf="error.length < 1 && nearestCities.length > 0">
-  <h3>Here are the 5 nearest cities sorted in alphabetic order</h3>
+  <h3>Here are the nearest cities sorted in alphabetic order</h3>
   <div class="results" *ngFor="let city of nearestCities">
     {{city.name}}
   </div>
