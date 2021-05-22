@@ -27,9 +27,9 @@ export class AppComponent implements OnInit {
   nearestCities: CityData[] = [];
 
   searchForm = new FormGroup({
-    country: new FormControl('', Validators.required),
-    state: new FormControl('', Validators.required),
-    city: new FormControl('', Validators.required)
+    country: new FormControl(null, Validators.required),
+    state: new FormControl(null, Validators.required),
+    city: new FormControl(null, Validators.required)
   });
 
   ngOnInit() {

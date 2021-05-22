@@ -8,7 +8,7 @@
       (change)="getStates($event)"
       autofocus
     >
-      <option value="" hidden>Select Country</option>
+      <option value=null hidden>Select Country</option>
       <option *ngFor="let country of countries" [value]="country.code">
         {{country.name}}</option
       >
@@ -17,7 +17,7 @@
 
   <div class="state-class">
     <select id="state" formControlName="state" (change)="getCities($event)">
-      <option value="" hidden>Select State</option>
+      <option value=null hidden>Select State</option>
       <option *ngFor="let state of states" [value]="state.isoCode">
         {{state.name}}</option
       >
@@ -26,7 +26,7 @@
 
   <div class="city-class">
     <select id="city" formControlName="city">
-      <option value="" hidden>Select City</option>
+      <option value=null hidden>Select City</option>
       <option *ngFor="let city of cities" [value]="city.id">
         {{city.name}}</option
       >
