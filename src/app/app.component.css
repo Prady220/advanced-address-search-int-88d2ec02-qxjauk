@@ -36,3 +36,20 @@ select:focus {
 .error {
   color: red;
 }
+
+.results {
+  font-weight: 600;
+  color: darkblue;
+}
+
+.subVsObs ul {
+  list-style-type: none;
+}
+
+.subVsObs li {
+  font-size: small;
+}
+
+.subVsObs {
+  margin-top: 50px;
+}

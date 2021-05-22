@@ -8,7 +8,7 @@
       (change)="getStates($event)"
       autofocus
     >
-      <option value="" hidden>Select Country</option>
+      <option value=null hidden>Select Country</option>
       <option *ngFor="let country of countries" [value]="country.code">
         {{country.name}}</option
       >
@@ -17,7 +17,7 @@
 
   <div class="state-class">
     <select id="state" formControlName="state" (change)="getCities($event)">
-      <option value="" hidden>Select State</option>
+      <option value=null hidden>Select State</option>
       <option *ngFor="let state of states" [value]="state.isoCode">
         {{state.name}}</option
       >
@@ -26,7 +26,7 @@
 
   <div class="city-class">
     <select id="city" formControlName="city">
-      <option value="" hidden>Select City</option>
+      <option value=null hidden>Select City</option>
       <option *ngFor="let city of cities" [value]="city.id">
         {{city.name}}</option
       >
@@ -49,4 +49,14 @@
   <div class="results" *ngFor="let city of nearestCities">
     {{city.name}}
   </div>
+</div>
+
+<div class="subVsObs">
+  <h5>Example of subject vs observable that we discussed earlier</h5>
+  <ul class="subscriptionList">
+    <li>observable subscription1 value: {{obsSub1}}</li>
+    <li>observable subscription2 value: {{obsSub2}}</li>
+    <li>subject subscription1 value: {{subjectSub1}}</li>
+    <li>subject subscription2 value: {{subjectSub2}}</li>
+  </ul>
 </div>

@@ -4,6 +4,7 @@ import { CountryData, StateData, CityData } from './app.model';
 import { OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { observable, Observable, of, Subject } from 'rxjs';
 
 @Component({
   selector: 'my-app',
@@ -27,13 +28,20 @@ export class AppComponent implements OnInit {
   nearestCities: CityData[] = [];
 
   searchForm = new FormGroup({
-    country: new FormControl('', Validators.required),
-    state: new FormControl('', Validators.required),
-    city: new FormControl('', Validators.required)
+    country: new FormControl(null, Validators.required),
+    state: new FormControl(null, Validators.required),
+    city: new FormControl(null, Validators.required)
   });
+
+  //For subject vs observable example
+  obsSub1; 
+  obsSub2;
+  subjectSub1;
+  subjectSub2;
 
   ngOnInit() {
     this.getCountries();
+    this.subVsObs();
   }
 
   getCountries() {
@@ -52,15 +60,20 @@ export class AppComponent implements OnInit {
     this.appService.getStatesByCountry(this.countryCode).subscribe(
       res => {
         this.states = (res.data as StateData[]).sort(this.sortCriteria);
-        this.states.length == 0
-          ? this.renderError(
-              'Oops! No states for this country, please select a different one'
-            )
-          : this.renderError('');
+        if (this.states.length === 0) {
+          this.renderError(
+            'Oops! No states for this country, please select a different one'
+          );
+          this.cities = [];
+          this.searchForm.controls['state'].reset();
+          this.searchForm.controls['city'].reset();
+        } else {
+          this.renderError('');
+          document.getElementById('state').focus();
+        }
       },
       error => this.renderError(error.message)
     );
-    document.getElementById('state').focus();
   }
 
   getCities(event) {
@@ -69,15 +82,18 @@ export class AppComponent implements OnInit {
       .subscribe(
         res => {
           this.cities = (res.data as CityData[]).sort(this.sortCriteria);
-          this.cities.length == 0
-            ? this.renderError(
-                'Oops! No cities for this country, please select a different one'
-              )
-            : this.renderError('');
+          if (this.cities.length === 0) {
+            this.renderError(
+              'Oops! No cities for this state, please select a different one'
+            );
+          } else {
+            this.renderError('');
+            document.getElementById('city').focus();
+          }
         },
         error => this.renderError(error.message)
       );
-    document.getElementById('city').focus();
+    
   }
 
   getNearestCities() {
@@ -96,7 +112,7 @@ export class AppComponent implements OnInit {
   }
 
   resetSelection() {
-    this.searchForm.reset;
+    this.searchForm.reset();
     this.error = '';
     this.getCountries();
   }
@@ -115,5 +131,17 @@ export class AppComponent implements OnInit {
       return 1;
     }
     return 0;
+  }
+
+  //Example for the difference between observable and subject that we discussed in the interview
+  subVsObs() {
+    let observable = Observable.create(obs => obs.next(Math.random()));
+    observable.subscribe(v => this.obsSub1 = v);
+    observable.subscribe(v => this.obsSub2 = v);
+
+    let subject = new Subject();
+    subject.subscribe(v => this.subjectSub1 = v);
+    subject.subscribe(v => this.subjectSub2 = v);
+    subject.next(Math.random());
   }
 }
