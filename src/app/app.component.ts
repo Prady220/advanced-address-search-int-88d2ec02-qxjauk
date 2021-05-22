@@ -114,6 +114,9 @@ export class AppComponent implements OnInit {
   resetSelection() {
     this.searchForm.reset();
     this.error = '';
+    this.countries = [];
+    this.states = [];
+    this.cities = [];
     this.nearestCities = [];
     this.getCountries();
   }
