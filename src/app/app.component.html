@@ -1,0 +1,43 @@
+<h2>{{title}}</h2>
+
+<form [formGroup]="searchForm" (ngSubmit)="getNearestCities()">
+
+  <div class="country-class">
+    <select id="country" formControlName="country"
+    (change)="getStates($event)" autofocus>
+      <option value="" hidden>Select Country</option>
+      <option *ngFor="let country of countries" [value]="country.code"> {{country.name}}</option>
+    </select>
+  </div>
+
+  <div class="state-class">
+    <select id="state" formControlName="state"
+    (change)="getCities($event)">
+      <option value="" hidden>Select State</option>
+      <option *ngFor="let state of states" [value]="state.isoCode"> {{state.name}}</option>
+    </select>
+  </div>
+
+  <div class="city-class">
+    <select id="city" formControlName="city">
+      <option value="" hidden>Select City</option>
+      <option *ngFor="let city of cities" [value]="city.id"> {{city.name}}</option>
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="searchForm.invalid" id="submit-btn">Submit</button>
+
+  <button type="reset" id="reset-btn" (click)="resetSelection()">Reset</button>
+
+</form>
+
+<h4 *ngIf="error.length > 0" class="error">
+  {{error}}
+</h4>
+
+<div *ngIf="error.length < 1 && nearestCities.length > 0">
+  <h3> Here are 5 cities sorted in alphabetic order </h3>
+  <div class="results" *ngFor="let city of nearestCities">
+    {{city.name}}
+  </div>
+</div>

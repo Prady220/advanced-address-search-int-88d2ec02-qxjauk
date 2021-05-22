@@ -1,0 +1,38 @@
+p {
+  font-family: Lato;
+}
+
+select {
+  margin: 5px 0 5px 0;
+  padding: 5px;
+  border-radius: 6px;
+}
+
+button {
+  margin: 10px;
+  border-radius: 4px;
+  font-size: medium;
+  font-weight: 600;
+  padding: 3px 10px 2px 10px;
+}
+
+select:focus {
+  border: 2px solid blue;
+}
+
+#reset-btn {
+  background-color: rgb(154, 167, 236);
+}
+
+#submit-btn {
+  background-color: #0cc70c;
+}
+
+#submit-btn:disabled {
+  background-color: rgb(177, 207, 209);
+  opacity: 0.7;
+}
+
+.error {
+  color: red;
+}

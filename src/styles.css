@@ -1,0 +1,9 @@
+/* Add application styles & imports to this file! */
+my-app {
+  text-align: center;
+  font-family: Verdana, sans-serif;
+}
+
+body {
+  background-color: rgb(195, 245, 246);
+}
