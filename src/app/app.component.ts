@@ -140,6 +140,8 @@ export class AppComponent implements OnInit {
   //Example for the difference between observable and subject that we discussed in the interview
   subVsObs() {
     let observable = Observable.create(obs => obs.next(Math.random()));
+    //If of() is used instead of create() then the behavior is similar to Subject
+    //Which was the issue I could not figure out in the interview
     observable.subscribe(v => this.obsSub1 = v);
     observable.subscribe(v => this.obsSub2 = v);
 
